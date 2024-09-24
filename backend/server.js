@@ -49,9 +49,32 @@ app.post('/add', async (req, res) => {
     res.status(404).send(error)
   }
 })
-app.put('/update', (req, res) => {
-
+app.put('/update/:id', async(req, res) => {
+  try {
+        const updatedTask = await TaskModel.findByIdAndUpdate(req.params.id, 
+        {
+          ...req.body
+        })
+       
+      
+      await updatedTask.save()
+      res.status(200).send("Successfully Updated")
+  } catch (error) {
+    res.status(404).send(error)
+  }
 })
-app.delete('/delete', (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
+  try {
+    const foundTask = await TaskModel.findById(req.params.id)
+    if(foundTask){
+      const deleteTask = await TaskModel.findByIdAndDelete(req.params.id)
+      res.status(200).send("Task was deleted")
+    }
+    else{
+    res.status(404).send("Task doesn't exist")
+    }
 
+  }catch(error){
+    res.status(404).send(error)
+  }
 })
