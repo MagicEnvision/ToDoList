@@ -1,6 +1,10 @@
 
 import './App.css';
 import { useEffect, useState } from 'react'
+import NavBar from './components/NavBar';
+import { Route, Routes } from 'react-router-dom';
+import {SignUp} from './pages/SignUp';
+import {Login} from './pages/Login';
 
 const API_URL = "http://localhost:3001/"
 function App() {
@@ -118,9 +122,18 @@ function App() {
   useEffect(()=>{
     fetchList()
   }, [])
+
   return (
     <div className="App">
+      
       <div className="list">
+      <NavBar/>
+      <Routes>
+        <Route path="/"/>
+        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/login' element={<Login/>}/>
+      </Routes>
+
         <h1>List of To Do's</h1>
         <input
   type="text"
