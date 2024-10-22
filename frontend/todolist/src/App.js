@@ -129,28 +129,34 @@ function App() {
       <div className="list">
       <NavBar/>
       <Routes>
-        <Route path="/"/>
+        <Route path="/" element=""/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
 
-        <h1>List of To Do's</h1>
+        <section className='main'>
+          
+       <div className='title'> <h1>List of To Do's</h1>
+       <button type="submit"onClick={createToDo}>Add Task</button>
+       </div>
+        
         <input
-  type="text"
-  name="title"
-  value={newTask.title}
-  onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-  placeholder="Enter the task name"
-/>
-<input
-  type="text"
-  name="description"
-  value={newTask.description}
-  onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-  placeholder="Enter the task description"
-/>
-<button type="submit"onClick={createToDo}>Add Task</button>
-        <ul>
+            type="text"
+            className="inputTitle"
+            value={newTask.title}
+            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+            placeholder="Enter the Task Name"
+        />
+        <input
+            type="text"
+            className="inputDesc"
+            value={newTask.description}
+            onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+            placeholder="Enter the Task Description"
+        />
+
+
+        <ul className='view'>
           {
             listItems.map((item) => (
               <li key={item._id}>
@@ -158,30 +164,37 @@ function App() {
                   <div>
                     <input 
                       type="text" 
-                      name="title" 
+                      className="toDoTitle" 
                       value={updatedItem.title} 
                       onChange={handleInputChange} 
                     />
                     <input 
                       type="text" 
-                      name="description" 
+                      className="toDoDesc" 
                       value={updatedItem.description} 
                       onChange={handleInputChange} 
                     />
-                    <button type="submit" onClick={() => handleUpdateSubmit(item._id)}>Save</button>
+                    <button className="update" type="submit" onClick={() => handleUpdateSubmit(item._id)}>Save</button>
                     <button onClick={() => setEditItemId(null)}>Cancel</button>
                   </div>
                 ) : (
                   <div>
-                    <strong>{item.title}</strong> - {item.description}
-                    <button type="submit" onClick={() => handleDelete(item._id)}>Delete</button>
-                    <button onClick={() => handleUpdate(item._id)}>Update</button>  {/* Update button */}
+                    <div className='itemTitle'>
+                    
+                    <h2>{item.title} </h2>_<h3>{item.description}</h3>
+                      <div className='itemButtons'>
+                      <button className="delete" type="submit" onClick={() => handleDelete(item._id)}>Delete</button>
+                      <button className="update" onClick={() => handleUpdate(item._id)}>Update</button>
+                      </div>
+                    </div>
+                   
                   </div>
                 )}
               </li>
             ))
           }
         </ul>
+        </section>
       </div>
     </div>
   );

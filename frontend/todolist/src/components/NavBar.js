@@ -1,4 +1,4 @@
-import { NavLink,  } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import React, {useState} from 'react'
 import './NavBar.css'
 function NavBar() {
@@ -7,7 +7,7 @@ function NavBar() {
   return (
     
         <nav>
-          <NavLink to="/" className="title">CRUD BASICS</NavLink>
+          <Link to="/" className="title">CRUD BASICS</Link>
           <div className="menu"  onClick={()=>{
             setMenuOpen(!menuOpen)
           }}>
